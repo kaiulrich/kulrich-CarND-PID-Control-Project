@@ -37,62 +37,66 @@ There's an experimental patch for windows in this [PR](https://github.com/udacit
 
 Tips for setting up your environment can be found [here](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/23d376c7-0195-4276-bdf0-e02f1f3c665d)
 
-## Editor Settings
+## How PID works
 
-We've purposefully kept editor configuration files out of this repo in order to
-keep it as simple and environment agnostic as possible. However, we recommend
-using the following settings:
+![alt text](./images/PIDfront.PNG "Logo Title Text 1")
 
-* indent using spaces
-* set tab width to 2 spaces (keeps the matrices in source code aligned)
+The distinguishing feature of the PID controller is the ability to use the three control terms of proportional, integral and derivative influence on the controller output to apply accurate and optimal control. The block diagram on the right shows the principles of how these terms are generated and applied. It shows a PID controller which continuously calculates an error value e ( t )  as the difference between a desired setpoint SP= r ( t )  and a measured process variable PV= y ( t )  and applies a correction based on proportional, integral, and derivative terms. The controller attempts to minimize the error over time by adjustment of a control variable u ( t ),  such as the opening of a control valve, to a new value determined by a weighted sum of the control terms.
 
-## Code Style
+###  Proportional control P
+```
+P provides a correction factor proportional to the CTE. The problem is that as the CTE being corrected approaches zero, so too does the correction, with the result that the error never really goes down to zero. On the other hand, if the correction is too strong, the correction may overshot and create a contrary error:
 
-Please (do your best to) stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html).
+High P correction
+- More capable of adjusting the error
+- Higher overshot
+	
+Low P correction
+- Less sensitivity
+- Less capable of adjusting the error
+```
+### Integral control I
+```
+I is a summation of the errors cumulated along time. Since some systematic bias may exist when applying corrections (for istance the steering is not executed precisely right), the summation may point out how the bias is contributing to the error generation and help annulating it by applying the correct correction: 
 
-## Project Instructions and Rubric
+High I correction:
+- More oscillatory
+- Faster reduction of cumulated error
+	
+Low I correction
+- Less oscillatory
+- Slower reduction of cumulated error
+```
+### Derivative control D
+```
+D looks at the rate of change of the error, and adds an instantaneous value to the loop output that is proportional to the rate of change of the error. As an effect, it reduces the oscillatory behaviour and countereffects the overshot of the response due to P because it can anticipates how the error is changing by using its rate of change.
 
-Note: regardless of the changes you make, your project must be buildable using
-cmake and make!
+ High D correction:
+- Overdamped
+- It will take a long time to correct
+	
+Low D correction
+- Underdamped
+- Still somehow oscillatory
+```
+Each of these controls is weighted by a coefficient (namely, Kp, Ki, Kd). All the weighted controls summed result in the total error, which can be used to countereffect (by changing its sign) the CTE feedback. The success of the PID in controlling CTE and having the car in the simulator stay on track depends on the successful definition of the numeic values the 
 
-More information is only accessible by people who are already enrolled in Term 2
-of CarND. If you are enrolled, see [the project page](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/f1820894-8322-4bb3-81aa-b26b3c6dcbaf/lessons/e8235395-22dd-4b87-88e0-d108c5e5bbf4/concepts/6a4d8d42-6a04-4aa6-b284-1697c0fd6562)
-for instructions and the project rubric.
+## Running the Program for manual tuning.
 
-## Hints!
+```
+./pid Kp Ki Kd 
+```
+When ever the pid program starts new the simulator resets.
 
-* You don't have to follow this directory structure, but if you do, your work
-  will span all of the .cpp files here. Keep an eye out for TODOs.
+## Solution
 
-## Call for IDE Profiles Pull Requests
+In this implementation, I use the following parameters:
 
-Help your fellow students!
+```
+Kp = 0.1
+Ki = 0.005
+Kd = 09
+```
 
-We decided to create Makefiles with cmake to keep this project as platform
-agnostic as possible. Similarly, we omitted IDE profiles in order to we ensure
-that students don't feel pressured to use one IDE or another.
 
-However! I'd love to help people get up and running with their IDEs of choice.
-If you've created a profile for an IDE that you think other students would
-appreciate, we'd love to have you add the requisite profile files and
-instructions to ide_profiles/. For example if you wanted to add a VS Code
-profile, you'd add:
-
-* /ide_profiles/vscode/.vscode
-* /ide_profiles/vscode/README.md
-
-The README should explain what the profile does, how to take advantage of it,
-and how to install it.
-
-Frankly, I've never been involved in a project with multiple IDE profiles
-before. I believe the best way to handle this would be to keep them out of the
-repo root to avoid clutter. My expectation is that most profiles will include
-instructions to copy files to a new location to get picked up by the IDE, but
-that's just a guess.
-
-One last note here: regardless of the IDE used, every submitted project must
-still be compilable with cmake and make./
-
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
 
