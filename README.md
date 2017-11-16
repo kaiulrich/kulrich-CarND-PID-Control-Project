@@ -90,13 +90,30 @@ When ever the pid program starts new the simulator resets.
 
 ## Solution
 
-In this implementation, I use the following parameters:
+My best result I got with following parameters:
 
 ```
 Kp = 0.1
 Ki = 0.005
 Kd = 09
 ```
+### Reflection
+
+I started with a P Controller and tuned it that the car stays on the track as long as possible.
+Than I added Derivative part and tuned it in a way that it stays on the track pretty well. It just hits the curves border at some parts.
+After I added the  Integral the car stays on the track.
+
+It also would be possible to tune the parameter automatically, for example with the [twittle algorythmus](https://martin-thoma.com/twiddle/)
+
+By dynamically calculating the throttle values, a further improvement in driving behavior could be achieved.
+
+|  | P                     | PD                | PID  |
+|-----|---------------------------|---------------|------------|
+|**Comment**| oscillates heavily in the road| can drive on the road, hits the read line in the curves|  drives  smoothly through the track|
+| **Video**| [![E](https://img.youtube.com/vi/NAC67y9UfU0/0.jpg)](https://youtu.be/NAC67y9UfU0 "P")| [![E](https://img.youtube.com/vi/losWfdkJ2Cc/0.jpg)](https://youtu.be/losWfdkJ2Cc "PD") | [![E](https://img.youtube.com/vi/NAC67y9UfU0/0.jpg)](https://youtu.be/NAC67y9UfU0 "PID")|
+
+### 
+
 
 
 
