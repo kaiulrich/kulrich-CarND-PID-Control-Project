@@ -31,7 +31,7 @@ std::string hasData(std::string s) {
 int main(int argc, char* argv[])
 {
   double kp = 0.1;
-  double ki = 0.0001;
+  double ki = 0.005;
   double kd = 0.9;
 
   if (argc >= 4) {
