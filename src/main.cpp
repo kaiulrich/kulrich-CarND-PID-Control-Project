@@ -28,22 +28,44 @@ std::string hasData(std::string s) {
   return "";
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+  double kp = 0.1;
+  double ki = 0.0001;
+  double kd = 0.9;
+
+  if (argc >= 4) {
+    kp = std::stod(argv[1]);
+    ki = std::stod(argv[2]);
+    kd = std::stod(argv[3]);
+    std::cout << "kp: " << ki << " ki: " << ki << " kd: " << kd << std::endl;
+  }
+
+  //double kp = 0.1;
+  //double ki = 0.0001;
+  //double kd = 2.8;
+
   uWS::Hub h;
 
   // TODO: Initialize the pid variable.
   PID pid;
-  pid.Init(0.1, 0.001, 2.8);
+  pid.Init(kp, ki, kd);
+
+  bool new_start = true;
   
-  h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
+  h.onMessage([&pid, &new_start](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
     // The 2 signifies a websocket event
     if (length && length > 2 && data[0] == '4' && data[1] == '2')
     {
       auto s = hasData(std::string(data).substr(0, length));
-      if (s != "") {
+	if(new_start){
+	  // Start simulator from initial position
+       std::string msg("42[\"reset\", {}]");
+	  ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
+	  new_start = false;
+	}else if (s != "") {
         auto j = json::parse(s);
         std::string event = j[0].get<std::string>();
         if (event == "telemetry") {
