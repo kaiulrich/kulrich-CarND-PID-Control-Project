@@ -79,7 +79,7 @@ Low D correction
 - Underdamped
 - Still somehow oscillatory
 ```
-Each of these controls is weighted by a coefficient (namely, Kp, Ki, Kd). All the weighted controls summed result in the total error, which can be used to countereffect (by changing its sign) the CTE feedback. The success of the PID in controlling CTE and having the car in the simulator stay on track depends on the successful definition of the numeic values the 
+Each of these controls is weighted by a coefficient (namely, Kp, Ki, Kd). All the weighted controls summed result in the total error, which can be used to countereffect (by changing its sign) the CTE feedback. The success of the PID in controlling CTE and having the car in the simulator stay on track depends on the successful definition of the numeic values.
 
 ## Running the Program for manual tuning.
 
@@ -95,7 +95,7 @@ My best result I got with following parameters:
 ```
 Kp = 0.1
 Ki = 0.005
-Kd = 09
+Kd = 0.9
 ```
 ### Reflection
 
@@ -109,8 +109,9 @@ By dynamically calculating the throttle values, a further improvement in driving
 
 |  | P                     | PD                | PID  |
 |-----|---------------------------|---------------|------------|
-|**Comment**| oscillates heavily in the road| can drive on the road, hits the read line in the curves|  drives  smoothly through the track|
-| **Video**| [![E](https://img.youtube.com/vi/NAC67y9UfU0/0.jpg)](https://youtu.be/NAC67y9UfU0 "P")| [![E](https://img.youtube.com/vi/losWfdkJ2Cc/0.jpg)](https://youtu.be/losWfdkJ2Cc "PD") | [![E](https://img.youtube.com/vi/NAC67y9UfU0/0.jpg)](https://youtu.be/NAC67y9UfU0 "PID")|
+||Kp = 0.1 Ki = 0 Kd = 0| Kp = 0.1 Ki = 0  Kd = 0.9 | Kp = 0.1 Ki = 0.005 Kd = 0.9 | 
+|**Comment**| oscillates heavily in the road| can drive on the road, hits the read line in the curves|  drives  smoothly through the track a bit wobbly at low speed|
+| **Video**| [![E](https://img.youtube.com/vi/51WgsbzxZmc/0.jpg)](https://youtu.be/51WgsbzxZmc "P")| [![E](https://img.youtube.com/vi/ohKL-oc1nIs/0.jpg)](https://youtu.be/ohKL-oc1nIs "PD") | [![E](https://img.youtube.com/vi/mp5im0Wfn1g/0.jpg)](https://youtu.be/mp5im0Wfn1g "PID")|
 
 ### 
 
