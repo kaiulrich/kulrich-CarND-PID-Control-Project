@@ -81,11 +81,11 @@ int main(int argc, char* argv[])
 		pid.UpdateError(cte);
 		steer_value = pid.TotalError();  	      
 
-		if(steer_value > 1)
-		  steer_value = 1;
+		if(steer_value > 1.0)
+		  steer_value = 1.0;
 
-		if(steer_value < -1)
-            steer_value = -1;
+		if(steer_value < -1.0)
+            steer_value = -1.0;
 		
 		
           // DEBUG
