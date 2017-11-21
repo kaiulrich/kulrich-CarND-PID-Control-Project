@@ -94,7 +94,7 @@ My best result I got with following parameters:
 
 ```
 Kp = 0.1
-Ki = 0.005
+Ki = 0.0001
 Kd = 0.9
 ```
 ### Reflection
@@ -109,9 +109,9 @@ By dynamically calculating the throttle values, a further improvement in driving
 
 |  | P                     | PD                | PID  |
 |-----|---------------------------|---------------|------------|
-||Kp = 0.1 Ki = 0 Kd = 0| Kp = 0.1 Ki = 0  Kd = 0.9 | Kp = 0.1 Ki = 0.005 Kd = 0.9 | 
+||Kp = 0.1 Ki = 0 Kd = 0| Kp = 0.1 Ki = 0  Kd = 0.9 | Kp = 0.1 Ki = 0.0001 Kd = 0.9 | 
 |**Comment**| oscillates heavily in the road| can drive on the road, hits the read line in the curves|  drives  smoothly through the track a bit wobbly at low speed|
-| **Video**| [![E](https://img.youtube.com/vi/51WgsbzxZmc/0.jpg)](https://youtu.be/51WgsbzxZmc "P")| [![E](https://img.youtube.com/vi/ohKL-oc1nIs/0.jpg)](https://youtu.be/ohKL-oc1nIs "PD") | [![E](https://img.youtube.com/vi/mp5im0Wfn1g/0.jpg)](https://youtu.be/mp5im0Wfn1g "PID")|
+| **Video**| [![E](https://img.youtube.com/vi/51WgsbzxZmc/0.jpg)](https://youtu.be/51WgsbzxZmc "P")| [![E](https://img.youtube.com/vi/ohKL-oc1nIs/0.jpg)](https://youtu.be/ohKL-oc1nIs "PD") | [![E](https://img.youtube.com/vi/bAmmqY1nFqk/0.jpg)](https://youtu.be/bAmmqY1nFqk "PID")|
 
 ### 
 

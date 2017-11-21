@@ -31,7 +31,7 @@ std::string hasData(std::string s) {
 int main(int argc, char* argv[])
 {
   double kp = 0.1;
-  double ki = 0.005;
+  double ki = 0.0001;
   double kd = 0.9;
 
   if (argc >= 4) {
@@ -41,9 +41,6 @@ int main(int argc, char* argv[])
     std::cout << "kp: " << ki << " ki: " << ki << " kd: " << kd << std::endl;
   }
 
-  //double kp = 0.1;
-  //double ki = 0.0001;
-  //double kd = 2.8;
 
   uWS::Hub h;
 
@@ -84,6 +81,13 @@ int main(int argc, char* argv[])
 		pid.UpdateError(cte);
 		steer_value = pid.TotalError();  	      
 
+		if(steer_value > 1)
+		  steer_value = 1;
+
+		if(steer_value < -1)
+            steer_value = -1;
+		
+		
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
 
